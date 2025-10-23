@@ -8,17 +8,17 @@ A Julia implementation for the [NeurIPS 2025 Paper: Physics-Constrained Flow Mat
 
 > **Note**: This package is under active development. More features and capabilities will be added progressively.
 
-
 ## Installation
 
 ```julia
 using Pkg
-Pkg.add(url="https://github.com/utkarsh530/PCFM.jl")
+Pkg.add(url = "https://github.com/utkarsh530/PCFM.jl")
 ```
 
 Or in development mode:
+
 ```julia
-Pkg.develop(path="/path/to/PCFM")
+Pkg.develop(path = "/path/to/PCFM")
 ```
 
 ## Usage
@@ -26,6 +26,7 @@ Pkg.develop(path="/path/to/PCFM")
 For a complete working example, see [`examples/train_diffusion.jl`](examples/train_diffusion.jl).
 
 To run the example:
+
 ```bash
 julia --project examples/train_diffusion.jl
 ```

@@ -18,5 +18,4 @@ export prepare_input, interpolate_flow
 export train_ffm!, sample_ffm
 export generate_diffusion_data
 
-
 end # module PCFM

@@ -4,8 +4,6 @@ authors = ["Utkarsh <rajpututkarsh530@gmail.com>"]
 version = "0.1.0"
 
 [deps]
-AlgebraOfGraphics = "cbdf2221-f076-402e-a563-3d30da359d67"
-CairoMakie = "13f3f980-e62b-5c42-98c6-ff1f3baf88f0"
 Lux = "b2108857-7c20-44ae-9111-449ecde12c47"
 MLUtils = "f1d291b0-491e-4a28-83b9-f70985020b54"
 NeuralOperators = "ea5c82af-86e5-48da-8ee1-382d6ad7af4b"
@@ -14,8 +12,6 @@ Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 Reactant = "3c362404-f566-11ee-1572-e11a4b42c853"
 
 [compat]
-AlgebraOfGraphics = "0.11.8"
-CairoMakie = "0.15.6"
 Lux = "1.24.0"
 MLUtils = "0.4.8"
 NeuralOperators = "0.6.2"

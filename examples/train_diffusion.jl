@@ -41,14 +41,14 @@ println("  Data shape: $(size(u_data))")
 # 2. Create model
 println("\n[2/5] Creating FFM (Functional Flow Matching) model...")
 ffm = FFM(
-    nx=nx,
-    nt=nt,
-    emb_channels=emb_channels,
-    hidden_channels=64,
-    proj_channels=256,
-    n_layers=4,
-    modes=(32, 32),
-    device=reactant_device()
+    nx = nx,
+    nt = nt,
+    emb_channels = emb_channels,
+    hidden_channels = 64,
+    proj_channels = 256,
+    n_layers = 4,
+    modes = (32, 32),
+    device = reactant_device()
 );
 println("  Model created successfully")
 
@@ -58,14 +58,14 @@ compiled_funcs = PCFM.compile_functions(ffm, batch_size)
 
 # 4. Train model
 println("\n[4/5] Training model for $n_epochs epochs...")
-losses, tstate = train_ffm!(ffm, u_data; compiled_funcs, epochs=n_epochs, verbose=true)
+losses, tstate = train_ffm!(ffm, u_data; compiled_funcs, epochs = n_epochs, verbose = true)
 
 println("\nFinal loss: $(losses[end])")
 
 # 5. Generate samples
 println("\n[5/5] Generating samples...")
 n_samples = 32
-samples = sample_ffm(ffm, tstate, n_samples, 100; compiled_funcs, verbose=true)
+samples = sample_ffm(ffm, tstate, n_samples, 100; compiled_funcs, verbose = true)
 
 println("\n" * "=" ^ 60)
 println("Training Complete!")
@@ -76,34 +76,34 @@ println("\nPlotting results...")
 
 # Plot training curve
 p1 = plot(1:length(losses), losses,
-          yscale=:log10,
-          xlabel="Epoch",
-          ylabel="Loss (log scale)",
-          title="Training Loss",
-          legend=false,
-          linewidth=2)
+    yscale = :log10,
+    xlabel = "Epoch",
+    ylabel = "Loss (log scale)",
+    title = "Training Loss",
+    legend = false,
+    linewidth = 2)
 
 # Plot samples
 arr_data = Array(u_data)
 arr_samples = Array(samples)
 
 p_data = [heatmap(arr_data[:, :, 1, i],
-                   title="Training Data $i",
-                   xlabel="Time",
-                   ylabel="Space",
-                   c=:viridis)
+              title = "Training Data $i",
+              xlabel = "Time",
+              ylabel = "Space",
+              c = :viridis)
           for i in 1:min(2, batch_size)]
 
 p_samples = [heatmap(arr_samples[:, :, 1, i],
-                      title="Generated Sample $i",
-                      xlabel="Time",
-                      ylabel="Space",
-                      c=:viridis)
+                 title = "Generated Sample $i",
+                 xlabel = "Time",
+                 ylabel = "Space",
+                 c = :viridis)
              for i in 1:2]
 
 # Combine plots
-p2 = plot(p_data..., layout=(1, length(p_data)), size=(800, 300))
-p3 = plot(p_samples..., layout=(1, length(p_samples)), size=(800, 300))
+p2 = plot(p_data..., layout = (1, length(p_data)), size = (800, 300))
+p3 = plot(p_samples..., layout = (1, length(p_samples)), size = (800, 300))
 
 display(p1)
 display(p2)

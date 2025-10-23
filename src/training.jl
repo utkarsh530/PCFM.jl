@@ -5,32 +5,35 @@
 Train the Functional Flow Matching model using the given data.
 
 # Arguments
-- `ffm`: FFM model
-- `data`: Training data of shape (nx, nt, 1, n_samples)
-- `epochs`: Number of training epochs
-- `lr`: Learning rate
-- `use_compiled`: Whether to use compiled functions
-- `compiled_funcs`: Compiled functions from `compile_functions`
-- `verbose`: Print progress
+
+  - `ffm`: FFM model
+  - `data`: Training data of shape (nx, nt, 1, n_samples)
+  - `epochs`: Number of training epochs
+  - `lr`: Learning rate
+  - `use_compiled`: Whether to use compiled functions
+  - `compiled_funcs`: Compiled functions from `compile_functions`
+  - `verbose`: Print progress
 
 # Returns
-- `losses`: Array of training losses
-- `tstate`: Final training state
+
+  - `losses`: Array of training losses
+  - `tstate`: Final training state
 
 # Example
+
 ```julia
 ffm = FFM()
-data = generate_diffusion_data(32, 100, 100, (1.0f0, 5.0f0), (0.0f0, Float32(π)), (0.0f0, 1.0f0))
-losses, tstate = train_ffm!(ffm, data; epochs=1000)
+data = generate_diffusion_data(
+    32, 100, 100, (1.0f0, 5.0f0), (0.0f0, Float32(π)), (0.0f0, 1.0f0))
+losses, tstate = train_ffm!(ffm, data; epochs = 1000)
 ```
 """
 function train_ffm!(ffm::FFM, data;
-                    epochs=1000,
-                    lr=0.001f0,
-                    use_compiled=true,
-                    compiled_funcs=nothing,
-                    verbose=true)
-
+        epochs = 1000,
+        lr = 0.001f0,
+        use_compiled = true,
+        compiled_funcs = nothing,
+        verbose = true)
     nx = ffm.config[:nx]
     nt = ffm.config[:nt]
     emb_channels = ffm.config[:emb_channels]
@@ -68,9 +71,12 @@ function train_ffm!(ffm::FFM, data;
         x_input = prepare_input_fn(x_t, t, nx, nt, n_samples, emb_channels)
 
         # Training step
-        (_, loss, _, tstate) = Training.single_train_step!(
+        (_,
+            loss,
+            _,
+            tstate) = Training.single_train_step!(
             AutoEnzyme(), MSELoss(), (x_input, v_target), tstate;
-            return_gradients=Val(false)
+            return_gradients = Val(false)
         )
 
         push!(losses, Float32(loss))

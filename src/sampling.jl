@@ -5,27 +5,29 @@
 Generate samples from the trained Functional Flow Matching model using Euler integration.
 
 # Arguments
-- `ffm`: FFM model
-- `tstate`: Training state (or use `ffm.ps` and `ffm.st` directly)
-- `n_samples`: Number of samples to generate
-- `n_steps`: Number of Euler integration steps
-- `use_compiled`: Whether to use compiled functions
-- `compiled_funcs`: Compiled functions from `compile_functions`
-- `verbose`: Print progress
+
+  - `ffm`: FFM model
+  - `tstate`: Training state (or use `ffm.ps` and `ffm.st` directly)
+  - `n_samples`: Number of samples to generate
+  - `n_steps`: Number of Euler integration steps
+  - `use_compiled`: Whether to use compiled functions
+  - `compiled_funcs`: Compiled functions from `compile_functions`
+  - `verbose`: Print progress
 
 # Returns
-- Generated samples of shape (nx, nt, 1, n_samples)
+
+  - Generated samples of shape (nx, nt, 1, n_samples)
 
 # Example
+
 ```julia
 samples = sample_ffm(ffm, tstate, 32, 100)
 ```
 """
 function sample_ffm(ffm::FFM, tstate, n_samples, n_steps;
-                   use_compiled=true,
-                   compiled_funcs=nothing,
-                   verbose=true)
-
+        use_compiled = true,
+        compiled_funcs = nothing,
+        verbose = true)
     nx = ffm.config[:nx]
     nt = ffm.config[:nt]
     emb_channels = ffm.config[:emb_channels]
@@ -54,7 +56,7 @@ function sample_ffm(ffm::FFM, tstate, n_samples, n_steps;
     dt = 1.0f0 / n_steps
 
     # Euler integration from t=0 to t=1
-    for step in 0:n_steps-1
+    for step in 0:(n_steps - 1)
         if verbose && step % 10 == 0
             println("Sampling step: $step/$n_steps")
         end
