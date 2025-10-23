@@ -4,7 +4,7 @@
 
 [![arXiv](https://img.shields.io/badge/arXiv-2506.04171-b31b1b.svg)](https://arxiv.org/abs/2506.04171)
 
-A Julia implementation for the NeurIPS 2025 Paper: Physics-Constrained Flow Matching: Sampling Generative Models with Hard Constraints
+A Julia implementation for the [NeurIPS 2025 Paper: Physics-Constrained Flow Matching: Sampling Generative Models with Hard Constraints](https://neurips.cc/virtual/2025/poster/117071)
 
 > **Note**: This package is under active development. More features and capabilities will be added progressively.
 
