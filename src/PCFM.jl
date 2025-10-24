@@ -15,7 +15,7 @@ include("./sampling.jl")
 # Export main functions
 export FFM
 export prepare_input, interpolate_flow
-export train_ffm!, sample_ffm
+export train_ffm!, sample_ffm, sample_pcfm
 export generate_diffusion_data
 
 end # module PCFM

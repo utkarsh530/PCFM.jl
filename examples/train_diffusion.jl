@@ -65,7 +65,10 @@ println("\nFinal loss: $(losses[end])")
 # 5. Generate samples
 println("\n[5/5] Generating samples...")
 n_samples = 32
-samples = sample_ffm(ffm, tstate, n_samples, 100; compiled_funcs, verbose = true)
+# samples = sample_ffm(ffm, tstate, n_samples, 100; compiled_funcs, verbose = true)
+
+samples = sample_pcfm(ffm, tstate, n_samples, 100; compiled_funcs, verbose = true)
+
 
 println("\n" * "=" ^ 60)
 println("Training Complete!")
